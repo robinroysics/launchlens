@@ -38,3 +38,5 @@ build/
 *.temp
 debug.txt
 test-ideas.txt
+test-*.txt
+*.log

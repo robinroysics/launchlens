@@ -1,138 +1,116 @@
-# LaunchLens - Competitive Intelligence for Startups
+# LaunchLens
 
-**Tagline:** Competitive intelligence for startups, not enterprises
+A CLI tool to validate startup ideas before you build them. Get instant verdict, market scores, and competitor analysis.
 
-## What is LaunchLens?
-
-LaunchLens is a powerful CLI tool that provides instant AI-powered validation for startup ideas. Get comprehensive competitive analysis, market insights, and actionable recommendations in seconds, not weeks.
-
-## Key Features
-
-### 🎯 Validation Modes
-- **Quick Validation**: Get YES/NO verdict with reasons
-- **Detailed Analysis**: Market scores, competition analysis, customer pain points
-- **Roast Mode**: Brutally honest feedback to test your idea's resilience
-- **JSON Output**: Structured data for integration with other tools
-
-### 📊 Analysis Components
-- **Competition Analysis**: Find and analyze existing competitors
-- **Market Scoring**: 0-10 scores for market opportunity, competition, and feasibility
-- **Customer Pain Assessment**: Identify unmet needs and pain levels
-- **Strategic Recommendations**: Specific pivot suggestions and alternatives
-- **Success Stories**: Learn from companies that pivoted successfully
-
-### 🔧 Developer-Friendly
-- **CLI-First Design**: Works perfectly in your terminal workflow
-- **API Key Management**: Secure, encrypted storage of credentials
-- **Multiple AI Models**: Choose between GPT-4, GPT-3.5-turbo, and more
-- **Batch Processing**: Validate multiple ideas at once
-- **Environment Flexibility**: Works with config files or environment variables
-
-## Usage
-
-### Basic Validation
 ```bash
-# Validate a single idea
-launchlens "AI-powered code review tool"
-
-# Get harsh, brutally honest feedback
-launchlens --roast "uber for dogs"
-
-# Detailed analysis with market scores
-launchlens --detailed "marketplace for tutors"
-
-# Output as JSON for processing
-launchlens --json "SaaS analytics tool"
+$ launchlens "uber for dogs"
+> VERDICT: NO ❌
+> Market oversaturated, unit economics don't work
+> Try: Pet walking for elderly-owned dogs in suburbs
 ```
 
-### Batch Processing
+## Why?
+
+Built this after wasting months on ideas nobody wanted. Now my AI assistant can validate ideas programmatically while I sleep.
+
+## What You Get
+
 ```bash
-# Validate multiple ideas from a file
-echo "AI todo app" > ideas.txt
-echo "Marketplace for services" >> ideas.txt
+$ launchlens "AI-powered code review tool"
+
+✅ VERDICT: YES (Score: 7/10)
+
+📊 REASONS:
+  • Real developer pain point
+  • AI can genuinely improve this
+  • B2B SaaS model proven
+
+🏢 COMPETITORS:
+  • DeepCode - AI code analysis
+  • Codacy - Automated reviews  
+  • SonarQube - Code quality
+
+💡 STRATEGY:
+  Focus on security vulnerabilities first, expand later
+```
+
+## Features
+
+- **Instant validation** - YES/NO verdict in 30 seconds
+- **Market scores** - 0-10 ratings for opportunity, competition, feasibility
+- **Real competitors** - Finds actual companies in the space
+- **Pivot suggestions** - Specific alternatives when idea is bad
+- **JSON output** - For AI agents and automation
+- **Roast mode** - When you need brutal honesty
+
+## Usage Examples
+
+```bash
+# Basic validation
+launchlens "social network for cats"
+
+# Get detailed scores
+launchlens --detailed "AI resume builder"
+
+# Output as JSON (for AI agents)
+launchlens --json "blockchain for real estate"
+
+# Brutal honesty mode
+launchlens --roast "uber for X"
+
+# Validate multiple ideas
 launchlens --file ideas.txt
 ```
 
-### Configuration Management
-```bash
-# List all settings
-launchlens config list
+## For AI Assistants
 
-# Get specific setting
-launchlens config get model
-
-# Change AI model
-launchlens config set model gpt-4
-```
-
-## CLI Commands Reference
+Perfect for AI agents that need to validate ideas programmatically:
 
 ```bash
-# Basic usage
-launchlens <idea>                    # Validate a single idea
-launchlens --help                    # Show help
+# Your AI can run this
+RESULT=$(launchlens --json "$IDEA")
+VERDICT=$(echo $RESULT | jq .decision)
 
-# Validation options
-launchlens --json <idea>             # Output as JSON
-launchlens --roast <idea>            # Extra harsh feedback
-launchlens --detailed <idea>         # Detailed market analysis
-launchlens --model <model> <idea>    # Use specific AI model
-launchlens --file <path>             # Batch process ideas
-
-# Configuration
-launchlens config set <key> <value>  # Set configuration
-launchlens config get <key>          # Get configuration value
-launchlens config list               # List all settings
+if [ "$VERDICT" = "YES" ]; then
+  # Proceed with building
+fi
 ```
 
-## Output Examples
+See [AI Integration Guide](./docs/ai-integration.md) for LangChain, AutoGPT, and more.
 
-### Standard Validation
-```
-🔍 Validating: "AI-powered code review tool"...
+## Documentation
 
-============================================================
-VERDICT: YES
-============================================================
+- [Examples](./docs/examples.md) - See real validation outputs
+- [JSON API](./docs/json-api.md) - Integrate with your tools
+- [AI Integration](./docs/ai-integration.md) - Use with AI assistants
+- [Web UI](./docs/web-ui.md) - Browser interface option
 
-📊 REASONS:
-  1. Real problem being solved
-  2. High demand for security tools
-  3. AI can provide competitive edge
-
-🏢 EXISTING COMPETITORS:
-  • DeepCode: AI-driven code analysis platform
-  • Veracode: Advanced security testing tool
-  • Checkmarx: SAST tool with AI capabilities
-```
-
-### Detailed Analysis (--detailed)
-```
-📊 SCORING BREAKDOWN:
-  Market Opportunity: ████████░░ 8/10
-  Competition Balance: ███████░░░ 7/10
-  Entry Feasibility: ██████░░░░ 6/10
-
-📈 MARKET ANALYSIS:
-  Market Size: $5B and growing
-  Growth Rate: 25% annually
-  Recent Funding: $500M in last quarter
-```
-
-## Installation
-
-### Quick Install (Recommended)
+## CLI Reference
 
 ```bash
-# Install globally from npm
+launchlens <idea>                    # Basic validation
+launchlens --json <idea>             # JSON output for scripts
+launchlens --detailed <idea>         # Include market scores
+launchlens --roast <idea>            # Harsh feedback mode
+launchlens --file <path>             # Batch validate ideas
+launchlens --model gpt-4 <idea>      # Use specific model
+
+launchlens config set <key> <value>  # Set API keys/settings
+launchlens config get <key>          # View configuration
+launchlens config list               # Show all settings
+```
+
+## Quick Start
+
+```bash
+# Install
 npm install -g launchlens
 
-# Configure your API keys
+# Configure API key (uses your own OpenAI key)
 launchlens config set openai-api-key sk-...
-launchlens config set perplexity-api-key pplx-...
 
-# Start validating ideas!
-launchlens "Your startup idea here"
+# Validate idea
+launchlens "your startup idea"
 ```
 
 ### Install from Source
@@ -154,38 +132,21 @@ launchlens config set openai-api-key sk-...
 
 ## Configuration
 
-### API Keys
-
-LaunchLens requires API keys for AI-powered analysis. You can configure them in multiple ways:
-
-#### Method 1: CLI Configuration (Recommended)
 ```bash
-# Set OpenAI API key
+# Set OpenAI API key (required)
 launchlens config set openai-api-key sk-...
 
-# Set Perplexity API key (optional, for competitor search)
+# Set Perplexity key (optional, for better competitor search)
 launchlens config set perplexity-api-key pplx-...
 
-# View current configuration
-launchlens config list
-```
-
-#### Method 2: Environment Variables
-```bash
-# Add to your ~/.bashrc or ~/.zshrc
-export OPENAI_API_KEY="sk-..."
-export PERPLEXITY_API_KEY="pplx-..."
-```
-
-### AI Models
-
-```bash
-# Set default model (options: gpt-4, gpt-3.5-turbo, etc.)
+# Choose AI model
 launchlens config set model gpt-4
 
-# Or use a specific model for one query
-launchlens --model gpt-4 "Your idea"
+# Or use environment variables
+export OPENAI_API_KEY="sk-..."
 ```
+
+API keys are encrypted and stored locally in `~/.launchlens/`
 
 ## Market Positioning
 
@@ -210,57 +171,52 @@ While tools like Crayon and Klue serve enterprises with $30K+/year subscriptions
 4. **Focus**: Finding opportunities, not monitoring
 5. **Startup-First**: Built for founders, not analysts
 
+## How It Works
+
+1. **Analyzes your idea** using GPT-4/GPT-3.5
+2. **Searches for competitors** via Perplexity API
+3. **Calculates market scores** based on opportunity, competition, feasibility
+4. **Suggests pivots** if the idea won't work
+5. **Returns structured data** for further processing
+
 ## Requirements
 
-- Node.js 16.0.0 or higher
-- OpenAI API key (required)
-- Perplexity API key (optional, for enhanced competitor search)
+- Node.js 16+
+- OpenAI API key (your own)
+- Perplexity API key (optional, for better competitor search)
 
-## Tech Stack
+## FAQ
 
-- **Core**: Node.js ES Modules
-- **AI**: OpenAI GPT-4 / GPT-3.5
-- **Research**: Perplexity API for competitor search
-- **Security**: AES-256 encryption for API keys
-- **Package**: npm global package support
+**Is this accurate?**  
+It's as good as GPT-4 with real competitor data. Better than building blindly.
 
-## Troubleshooting
+**Why CLI instead of web app?**  
+Because developers live in terminals and AI agents can call CLIs.
 
-### API Key Issues
-```bash
-# If you get "API key not configured" error:
-launchlens config set openai-api-key sk-...
+**Does it store my ideas?**  
+No. Everything runs locally with your API keys.
 
-# Verify key is set:
-launchlens config get openai-api-key
-```
-
-### Permission Issues
-```bash
-# If you get permission errors during global install:
-sudo npm install -g launchlens
-
-# Or use a Node version manager like nvm
-```
-
-### Model Errors
-```bash
-# If a model isn't available, try:
-launchlens config set model gpt-3.5-turbo
-```
+**Can I customize it?**  
+Yes. MIT licensed. Fork it, modify it, make it yours.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+PRs welcome. Some ideas:
+- Better competitor detection
+- More analysis criteria
+- Support for non-English ideas
+- Integration with more AI models
 
 ## License
 
-MIT
+MIT - Do whatever you want
 
-## Support
+## Links
 
-For questions or feedback, please open an issue on GitHub.
+- [GitHub](https://github.com/khoaleeeeee/launchlens)
+- [NPM Package](https://www.npmjs.com/package/launchlens)
+- [Report Issues](https://github.com/khoaleeeeee/launchlens/issues)
 
-## Author
+---
 
-Created by Khoa Le
+Built by [Khoa Le](https://github.com/khoaleeeeee) after too many failed startups

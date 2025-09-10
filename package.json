@@ -1,17 +1,25 @@
 {
   "name": "launchlens",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "main": "cli.js",
   "bin": {
     "launchlens": "./cli.js"
   },
+  "files": [
+    "cli.js",
+    "lib/",
+    "LICENSE",
+    "README.md",
+    ".env.example"
+  ],
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
     "cli": "node cli.js",
+    "test": "node test/cli.test.js",
     "test-cli": "node cli.js --help",
-    "prepublishOnly": "npm run test-cli"
+    "prepublishOnly": "npm run test && npm run test-cli"
   },
   "keywords": [
     "competitive-intelligence",
@@ -21,7 +29,12 @@
     "idea-validation",
     "market-research",
     "competitor-analysis",
-    "cli"
+    "cli",
+    "ai-tools",
+    "gpt",
+    "openai",
+    "automation",
+    "developer-tools"
   ],
   "author": "Khoa Le",
   "license": "MIT",
