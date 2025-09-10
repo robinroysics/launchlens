@@ -106,12 +106,16 @@ launchlens config list               # Show all settings
 # Install
 npm install -g launchlens
 
-# Configure API key (uses your own OpenAI key)
-launchlens config set openai-api-key sk-...
+# Configure API keys
+launchlens config set openai-api-key sk-...      # Required
+launchlens config set perplexity-api-key pplx-... # Recommended
 
 # Validate idea
 launchlens "your startup idea"
 ```
+
+⚠️ **Important**: Without Perplexity API key, competitor search returns placeholder data.
+Get your key at: https://www.perplexity.ai/settings/api
 
 ### Install from Source
 
@@ -132,11 +136,18 @@ launchlens config set openai-api-key sk-...
 
 ## Configuration
 
+### API Keys Required
+
+| API | Purpose | Required? | Get Key |
+|-----|---------|-----------|----------|
+| OpenAI | AI analysis & validation | ✅ Required | [OpenAI Platform](https://platform.openai.com/api-keys) |
+| Perplexity | Real competitor search | ⚠️ Highly Recommended | [Perplexity Settings](https://www.perplexity.ai/settings/api) |
+
 ```bash
-# Set OpenAI API key (required)
+# Set OpenAI API key (REQUIRED)
 launchlens config set openai-api-key sk-...
 
-# Set Perplexity key (optional, for better competitor search)
+# Set Perplexity key (RECOMMENDED - without it, competitors are fake)
 launchlens config set perplexity-api-key pplx-...
 
 # Choose AI model
@@ -144,9 +155,12 @@ launchlens config set model gpt-4
 
 # Or use environment variables
 export OPENAI_API_KEY="sk-..."
+export PERPLEXITY_API_KEY="pplx-..."
 ```
 
 API keys are encrypted and stored locally in `~/.launchlens/`
+
+**Note**: Without Perplexity API, you'll see generic competitors like "Existing Solution A" instead of real companies.
 
 ## Market Positioning
 
@@ -173,17 +187,36 @@ While tools like Crayon and Klue serve enterprises with $30K+/year subscriptions
 
 ## How It Works
 
-1. **Analyzes your idea** using GPT-4/GPT-3.5
-2. **Searches for competitors** via Perplexity API
+1. **Analyzes your idea** using GPT-4/GPT-3.5 (OpenAI)
+2. **Searches for real competitors** via Perplexity API (or returns placeholders without key)
 3. **Calculates market scores** based on opportunity, competition, feasibility
 4. **Suggests pivots** if the idea won't work
 5. **Returns structured data** for further processing
 
+### With vs Without Perplexity API
+
+**With Perplexity** (Recommended):
+```
+🏢 COMPETITORS:
+  • Notion - All-in-one workspace with AI
+  • Obsidian - Knowledge base with plugins
+  • Roam Research - Networked thought tool
+```
+
+**Without Perplexity** (Placeholder data):
+```
+🏢 COMPETITORS:
+  • Existing Solution A - Current market leader
+  • Existing Solution B - Popular alternative
+```
+
 ## Requirements
 
 - Node.js 16+
-- OpenAI API key (your own)
-- Perplexity API key (optional, for better competitor search)
+- OpenAI API key (required) - [Get key](https://platform.openai.com/api-keys)
+- Perplexity API key (recommended) - [Get key](https://www.perplexity.ai/settings/api)
+
+See [API Keys Guide](./docs/api-keys.md) for detailed setup instructions.
 
 ## FAQ
 

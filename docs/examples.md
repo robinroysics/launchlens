@@ -1,5 +1,37 @@
 # LaunchLens Examples
 
+## Important: Real vs Placeholder Competitors
+
+LaunchLens behavior depends on whether you have a Perplexity API key configured:
+
+### With Perplexity API (Real Competitors)
+```bash
+$ launchlens "Note-taking app with AI"
+
+🏢 EXISTING COMPETITORS:
+  • Notion: All-in-one workspace with AI writing assistant
+  • Obsidian: Knowledge base with community plugins and AI integration  
+  • Mem: AI-powered note-taking with auto-organization
+  • Reflect: Networked notes with GPT-4 integration
+  • Roam Research: Graph database for thoughts with AI features
+```
+
+### Without Perplexity API (Placeholder Data)
+```bash
+$ launchlens "Note-taking app with AI"
+
+🏢 EXISTING COMPETITORS:
+  • Existing Solution A: Current market leader
+  • Existing Solution B: Popular alternative
+```
+
+⚠️ **To get real competitor data**, set up your Perplexity API key:
+```bash
+launchlens config set perplexity-api-key pplx-...
+```
+
+See [API Keys Guide](./api-keys.md) for setup instructions.
+
 ## Basic Validation
 
 ### Good Idea Example

@@ -36,13 +36,16 @@ Examples:
   launchlens config list
 
 Configuration Keys:
-  openai-api-key       OpenAI API key for GPT analysis
-  perplexity-api-key   Perplexity API key for competitor search
+  openai-api-key       OpenAI API key for GPT analysis (REQUIRED)
+  perplexity-api-key   Perplexity API key for real competitor search (RECOMMENDED)
+                       Without this, you'll get placeholder competitor data
   model                AI model to use (gpt-4, gpt-4-turbo-preview, gpt-3.5-turbo, gpt-3.5-turbo-16k)
 
 Environment Variables (fallback if not configured):
   OPENAI_API_KEY       OpenAI API key
   PERPLEXITY_API_KEY   Perplexity API key
+
+Note: Get your Perplexity key at https://www.perplexity.ai/settings/api for accurate competitor data
 `);
 }
 

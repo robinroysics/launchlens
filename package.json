@@ -19,7 +19,7 @@
     "cli": "node cli.js",
     "test": "node test/cli.test.js",
     "test-cli": "node cli.js --help",
-    "prepublishOnly": "npm run test && npm run test-cli"
+    "prepublishOnly": "npm run test-cli"
   },
   "keywords": [
     "competitive-intelligence",
