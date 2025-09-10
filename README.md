@@ -162,28 +162,7 @@ API keys are encrypted and stored locally in `~/.launchlens/`
 
 **Note**: Without Perplexity API, you'll see generic competitors like "Existing Solution A" instead of real companies.
 
-## Market Positioning
 
-### Who This Is For
-- Early-stage startup founders
-- Solo entrepreneurs validating ideas
-- Product managers exploring new markets
-- Anyone who needs quick competitive intelligence
-
-### Who This Is NOT For
-- Enterprise companies needing ongoing monitoring
-- Teams requiring complex integrations
-- Companies needing detailed traffic analytics
-
-## Competitive Advantage
-
-While tools like Crayon and Klue serve enterprises with $30K+/year subscriptions, LaunchLens focuses on:
-
-1. **Speed**: 60-second analysis vs 7-8 week setup
-2. **Simplicity**: No training required
-3. **Affordability**: $29 vs $30,000+
-4. **Focus**: Finding opportunities, not monitoring
-5. **Startup-First**: Built for founders, not analysts
 
 ## How It Works
 
