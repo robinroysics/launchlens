@@ -1,0 +1,44 @@
+{
+  "name": "launchlens",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "cli.js",
+  "bin": {
+    "launchlens": "./cli.js"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "cli": "node cli.js",
+    "test-cli": "node cli.js --help",
+    "prepublishOnly": "npm run test-cli"
+  },
+  "keywords": [
+    "competitive-intelligence",
+    "startup-tools",
+    "market-analysis",
+    "startup-validation",
+    "idea-validation",
+    "market-research",
+    "competitor-analysis",
+    "cli"
+  ],
+  "author": "Khoa Le",
+  "license": "MIT",
+  "description": "Competitive intelligence for startups, not enterprises. Validate startup ideas with AI-powered analysis.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khoaleeeeee/launchlens.git"
+  },
+  "bugs": {
+    "url": "https://github.com/khoaleeeeee/launchlens/issues"
+  },
+  "homepage": "https://github.com/khoaleeeeee/launchlens#readme",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "openai": "^4.20.0"
+  }
+}

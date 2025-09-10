@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LaunchLens - Quick Idea Validation</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .analyzing { animation: pulse 2s infinite; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 px-6 py-4">
+    <div class="max-w-3xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-gray-900">LaunchLens</h1>
+      <span class="text-sm text-gray-600">Quick Idea Validation</span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-3xl mx-auto px-6 py-12">
+    <!-- Input Section -->
+    <div id="input-section">
+      <div class="bg-white rounded-lg shadow-md p-8">
+        <h2 class="text-3xl font-bold mb-2">Should You Build This?</h2>
+        <p class="text-gray-600 mb-6">Get a clear YES or NO in 30 seconds</p>
+        
+        <div class="space-y-4">
+          <label class="block">
+            <span class="text-sm font-medium text-gray-700">Describe your idea</span>
+            <textarea 
+              id="idea-input"
+              rows="3"
+              placeholder="I want to build..."
+              class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+            ></textarea>
+            <span class="text-xs text-gray-500 mt-1 block">Example: "I want to build a marketplace for connecting local tutors with students"</span>
+          </label>
+          
+          <div class="flex gap-4">
+            <label class="flex items-center gap-2 text-sm text-gray-600">
+              <input type="checkbox" id="roast-mode" class="rounded">
+              <span>🔥 Roast Mode (extra harsh)</span>
+            </label>
+            <label class="flex items-center gap-2 text-sm text-gray-600">
+              <input type="checkbox" id="detailed-mode" class="rounded">
+              <span>📊 Detailed Analysis (market scores)</span>
+            </label>
+          </div>
+          
+          <button 
+            onclick="validateIdea()"
+            class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+          >
+            Validate My Idea →
+          </button>
+        </div>
+      </div>
+      
+      <!-- Info Cards -->
+      <div class="grid md:grid-cols-3 gap-4 mt-8">
+        <div class="bg-white p-4 rounded-lg border border-gray-200">
+          <div class="text-2xl mb-2">⚡</div>
+          <h3 class="font-semibold">30 Second Results</h3>
+          <p class="text-sm text-gray-600">Quick validation, no fluff</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200">
+          <div class="text-2xl mb-2">🎯</div>
+          <h3 class="font-semibold">Clear Decision</h3>
+          <p class="text-sm text-gray-600">YES or NO with reasons</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-gray-200">
+          <div class="text-2xl mb-2">💡</div>
+          <h3 class="font-semibold">Next Steps</h3>
+          <p class="text-sm text-gray-600">Know what to do next</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Section -->
+    <div id="loading-section" class="hidden">
+      <div class="bg-white rounded-lg shadow-md p-8 text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4 analyzing">
+          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Validating Your Idea...</h3>
+        <p class="text-gray-600">Checking market competition and viability</p>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results-section" class="hidden">
+      <!-- Decision Card -->
+      <div id="decision-card" class="mb-6">
+        <!-- Will be populated dynamically -->
+      </div>
+      
+      <!-- Market Scores Card (for detailed mode) -->
+      <div id="scores-card" class="hidden bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">📊 Market Analysis Scores</h3>
+        <div id="scores-breakdown" class="space-y-4">
+          <!-- Will be populated dynamically -->
+        </div>
+      </div>
+      
+      <!-- Market Details Card (for detailed mode) -->
+      <div id="market-details-card" class="hidden bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">📈 Market Intelligence</h3>
+        <div id="market-details" class="grid md:grid-cols-2 gap-4">
+          <!-- Will be populated dynamically -->
+        </div>
+      </div>
+      
+      <!-- Reasons Card -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">Why This Decision?</h3>
+        <div id="reasons-list" class="space-y-3">
+          <!-- Will be populated dynamically -->
+        </div>
+      </div>
+      
+      <!-- Competitors Card -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4">Who's Already Doing This</h3>
+        <div id="competitors-list" class="space-y-2">
+          <!-- Will be populated dynamically -->
+        </div>
+      </div>
+      
+      <!-- Alternative Card (if NO) -->
+      <div id="alternative-card" class="hidden bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-3 text-yellow-900">What You Should Do Instead</h3>
+        <div id="alternatives-list" class="space-y-2 mb-4">
+          <!-- Will be populated dynamically -->
+        </div>
+        <button 
+          id="try-suggestion-btn"
+          onclick="trySuggestion()"
+          class="text-sm bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors"
+        >
+          Try First Suggestion →
+        </button>
+      </div>
+      
+      <!-- Pivot Inspiration Card (if NO) -->
+      <div id="inspiration-card" class="hidden bg-gray-50 border border-gray-200 rounded-lg p-6 mb-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-900">Successful Pivots</h3>
+        <div class="space-y-3" id="pivot-examples">
+          <!-- Will be populated dynamically -->
+        </div>
+        <p class="text-sm text-gray-600 mt-4">These companies pivoted from failed ideas to billion-dollar successes</p>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="flex gap-4">
+        <button 
+          onclick="startOver()"
+          class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors"
+        >
+          Try Another Idea
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let currentSuggestion = '';
+    
+    async function validateIdea() {
+      const idea = document.getElementById('idea-input').value.trim();
+      const roastMode = document.getElementById('roast-mode').checked;
+      const detailedMode = document.getElementById('detailed-mode').checked;
+      
+      if (!idea || idea.length < 10) {
+        alert('Please describe your idea in more detail (at least 10 characters)');
+        return;
+      }
+      
+      // Store the idea in session storage for tracking
+      sessionStorage.setItem('lastIdea', idea);
+      
+      // Show loading
+      document.getElementById('input-section').classList.add('hidden');
+      document.getElementById('loading-section').classList.remove('hidden');
+      
+      try {
+        const response = await fetch('/api/validate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ idea, roastMode, detailed: detailedMode })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          displayResults(data);
+        } else {
+          alert('Validation failed: ' + (data.error || 'Unknown error'));
+          startOver();
+        }
+      } catch (error) {
+        console.error('Validation error:', error);
+        alert('Failed to validate. Please try again.');
+        startOver();
+      }
+    }
+    
+    function displayResults(data) {
+      document.getElementById('loading-section').classList.add('hidden');
+      document.getElementById('results-section').classList.remove('hidden');
+      
+      // Display decision
+      const decisionCard = document.getElementById('decision-card');
+      const isYes = data.decision === 'YES';
+      const isMaybe = data.decision === 'MAYBE';
+      
+      decisionCard.className = `rounded-lg shadow-md p-8 text-center ${
+        isYes ? 'bg-green-50 border-2 border-green-500' : 
+        isMaybe ? 'bg-yellow-50 border-2 border-yellow-500' :
+        'bg-red-50 border-2 border-red-500'
+      }`;
+      
+      const scoreText = data.scores ? ` (Score: ${data.scores.overall}/10)` : '';
+      
+      decisionCard.innerHTML = `
+        <div class="text-6xl font-bold mb-4 ${
+          isYes ? 'text-green-600' : 
+          isMaybe ? 'text-yellow-600' :
+          'text-red-600'
+        }">
+          ${data.decision}${scoreText}
+        </div>
+        <p class="text-lg ${
+          isYes ? 'text-green-700' : 
+          isMaybe ? 'text-yellow-700' :
+          'text-red-700'
+        }">
+          ${isYes ? 'This idea has potential! But validate with customers first.' : 
+            isMaybe ? 'More research needed before deciding.' :
+            'Save your time and money. Try something else.'}
+        </p>
+      `;
+      
+      // Display scores if detailed mode
+      if (data.scores) {
+        document.getElementById('scores-card').classList.remove('hidden');
+        const scoresBreakdown = document.getElementById('scores-breakdown');
+        
+        scoresBreakdown.innerHTML = `
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm font-medium">Market Opportunity</span>
+                <span class="text-sm font-bold">${data.scores.breakdown.marketOpportunity}/10</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-blue-600 h-2 rounded-full" style="width: ${data.scores.breakdown.marketOpportunity * 10}%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm font-medium">Competition Balance</span>
+                <span class="text-sm font-bold">${data.scores.breakdown.competition}/10</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-green-600 h-2 rounded-full" style="width: ${data.scores.breakdown.competition * 10}%"></div>
+              </div>
+              <p class="text-xs text-gray-500 mt-1">Optimal: 3-5 competitors (validates demand)</p>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm font-medium">Entry Feasibility</span>
+                <span class="text-sm font-bold">${data.scores.breakdown.entryFeasibility}/10</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-purple-600 h-2 rounded-full" style="width: ${data.scores.breakdown.entryFeasibility * 10}%"></div>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        // Display market details
+        if (data.marketAnalysis) {
+          document.getElementById('market-details-card').classList.remove('hidden');
+          const marketDetails = document.getElementById('market-details');
+          
+          marketDetails.innerHTML = `
+            <div class="bg-gray-50 p-4 rounded">
+              <h4 class="font-semibold text-sm text-gray-700 mb-2">Market Size</h4>
+              <p class="text-xl font-bold">${data.marketAnalysis.size}</p>
+              <p class="text-sm text-gray-600">${data.marketAnalysis.growth} annual growth</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded">
+              <h4 class="font-semibold text-sm text-gray-700 mb-2">Customer Pain</h4>
+              <p class="text-xl font-bold">${data.customerPain.level}/10</p>
+              <p class="text-sm text-gray-600">${data.customerPain.unmetNeeds.length} unmet needs identified</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded">
+              <h4 class="font-semibold text-sm text-gray-700 mb-2">Competition</h4>
+              <p class="text-xl font-bold">${data.competitorAnalysis.count} competitors</p>
+              <p class="text-sm text-gray-600">${data.competitorAnalysis.concentration}</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded">
+              <h4 class="font-semibold text-sm text-gray-700 mb-2">Recent Funding</h4>
+              <p class="text-sm">${data.marketAnalysis.funding}</p>
+            </div>
+          `;
+        }
+      }
+      
+      // Display reasons
+      const reasonsList = document.getElementById('reasons-list');
+      reasonsList.innerHTML = data.reasons.map((reason, index) => `
+        <div class="flex items-start gap-3">
+          <span class="flex-shrink-0 w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-sm font-semibold text-gray-600">
+            ${index + 1}
+          </span>
+          <p class="text-gray-700">${reason}</p>
+        </div>
+      `).join('');
+      
+      // Display competitors
+      const competitors = data.competitorAnalysis?.competitors || data.competitors || [];
+      const competitorsList = document.getElementById('competitors-list');
+      competitorsList.innerHTML = competitors.map(comp => `
+        <div class="p-3 bg-gray-50 rounded border border-gray-100">
+          <div class="font-medium text-gray-900">${comp.name}</div>
+          ${comp.description ? `<div class="text-gray-600 text-sm mt-1">${comp.description}</div>` : ''}
+        </div>
+      `).join('');
+      
+      // Display alternatives if NO
+      if (!isYes && (data.alternatives || data.alternative)) {
+        document.getElementById('alternative-card').classList.remove('hidden');
+        const alternatives = data.alternatives || [data.alternative];
+        
+        document.getElementById('alternatives-list').innerHTML = alternatives.map((alt, index) => `
+          <div class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center text-sm font-semibold text-yellow-700">
+              ${index + 1}
+            </span>
+            <p class="text-yellow-800">${alt}</p>
+          </div>
+        `).join('');
+        
+        currentSuggestion = alternatives[0];
+      }
+      
+      // Display pivot inspirations if NO
+      if (!isYes && !isMaybe && data.pivotExamples && data.pivotExamples.length > 0) {
+        document.getElementById('inspiration-card').classList.remove('hidden');
+        
+        document.getElementById('pivot-examples').innerHTML = data.pivotExamples.map(example => `
+          <div class="flex items-start gap-3 p-3 bg-white rounded border border-gray-100">
+            <div>
+              <span class="font-semibold text-gray-900">${example.company}:</span>
+              <span class="text-gray-600 text-sm block mt-1">${example.story}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+      
+    }
+    
+    function trySuggestion() {
+      // Extract the core suggestion (might need to be smarter about this)
+      let suggestion = currentSuggestion;
+      
+      // Try to extract a more specific idea from the alternative text
+      if (suggestion.includes('niche')) {
+        suggestion = sessionStorage.getItem('lastIdea') + ' for a specific niche market';
+      } else if (suggestion.includes('specific')) {
+        suggestion = 'A more focused version of: ' + sessionStorage.getItem('lastIdea');
+      }
+      
+      // Pre-fill the input with the suggestion
+      document.getElementById('idea-input').value = suggestion;
+      
+      // Go back to input
+      document.getElementById('results-section').classList.add('hidden');
+      document.getElementById('inspiration-card').classList.add('hidden');
+      document.getElementById('alternative-card').classList.add('hidden');
+      document.getElementById('input-section').classList.remove('hidden');
+      
+      // Focus on the input
+      document.getElementById('idea-input').focus();
+      document.getElementById('idea-input').select();
+    }
+    
+    function startOver() {
+      document.getElementById('idea-input').value = '';
+      document.getElementById('results-section').classList.add('hidden');
+      document.getElementById('loading-section').classList.add('hidden');
+      document.getElementById('input-section').classList.remove('hidden');
+      document.getElementById('alternative-card').classList.add('hidden');
+      document.getElementById('inspiration-card').classList.add('hidden');
+      document.getElementById('scores-card').classList.add('hidden');
+      document.getElementById('market-details-card').classList.add('hidden');
+    }
+    
+    // Allow Enter key to submit
+    document.getElementById('idea-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        validateIdea();
+      }
+    });
+  </script>
+</body>
+</html>
